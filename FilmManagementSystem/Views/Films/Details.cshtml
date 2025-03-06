@@ -1,0 +1,71 @@
+﻿@model FilmManagementSystem.Models.Film
+
+@{
+    ViewData["Title"] = "Detail Film";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">@Model.Title (@Model.ReleaseYear)</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-md-3 fw-bold">@Html.DisplayNameFor(model => model.Director)</div>
+                        <div class="col-md-9">@Html.DisplayFor(model => model.Director)</div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-3 fw-bold">@Html.DisplayNameFor(model => model.Genre)</div>
+                        <div class="col-md-9">@Html.DisplayFor(model => model.Genre)</div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-3 fw-bold">@Html.DisplayNameFor(model => model.Duration)</div>
+                        <div class="col-md-9">
+                            @if (Model.Duration.HasValue)
+                            {
+                                @(Model.Duration.Value + " menit")
+                            }
+                            else
+                            {
+                                <span class="text-muted">Tidak ditentukan</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-3 fw-bold">@Html.DisplayNameFor(model => model.Description)</div>
+                        <div class="col-md-9">
+                            @if (!string.IsNullOrEmpty(Model.Description))
+                            {
+                                @Html.DisplayFor(model => model.Description)
+                            }
+                            else
+                            {
+                                <span class="text-muted">Tidak ada deskripsi</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-3 fw-bold">@Html.DisplayNameFor(model => model.DateAdded)</div>
+                        <div class="col-md-9">@Model.DateAdded.ToString("dd MMMM yyyy")</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+                        <a asp-action="Index" class="btn btn-primary">
+                            <i class="bi bi-arrow-left"></i> Kembali ke Daftar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
